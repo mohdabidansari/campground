@@ -38,13 +38,15 @@ app.use(function(req, res, next){
     next();
 });
 
-//mongoose.connect("mongodb://localhost:27017/yelp_campV12", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://Abid:Abid1294@cluster0-uxo9h.mongodb.net/test?retryWrites=true&w=majority",
- {useNewUrlParser: true}).then(() => {
-        console.log("Connected TO db");
-    }).catch(err => {
-        console.log("ERROR: ", err.message);
-    });
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_campV12";
+
+mongoose.connect(url, {useNewUrlParser: true});
+// mongoose.connect("mongodb+srv://Abid:Abid1294@cluster0-uxo9h.mongodb.net/test?retryWrites=true&w=majority",
+//  {useNewUrlParser: true}).then(() => {
+//         console.log("Connected TO db");
+//     }).catch(err => {
+//         console.log("ERROR: ", err.message);
+//     });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
